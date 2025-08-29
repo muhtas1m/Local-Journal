@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Local Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Personal Journal</h1>
+      <nav>
+        <a class="btn secondary" href="{{ url_for('entries') }}">View Entries</a>
+      </nav>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('submit') }}" class="card">
+      <div class="grid">
+        <label>
+          <span>Date</span>
+          <input type="date" name="date" />
+        </label>
+        <label>
+          <span>Time</span>
+          <input type="time" name="time"/>
+        </label>
+        <label>
+          <span>Location</span>
+          <input type="text" name="location" placeholder="Optional"/>
+        </label>
+      </div>
+
+      <label>
+        <span>Daily Summary</span>
+        <textarea name="summary" rows="3" required></textarea>
+      </label>
+
+      <label>
+        <span>Thoughts & Feelings</span>
+        <textarea name="thoughts" rows="3"></textarea>
+      </label>
+
+      <label>
+        <span>Reflection</span>
+        <textarea name="reflection" rows="3"></textarea>
+      </label>
+
+      <label>
+        <span>Gratitude</span>
+        <textarea name="gratitude" rows="2"></textarea>
+      </label>
+
+      <label>
+        <span>Next Steps / Intentions</span>
+        <textarea name="nextsteps" rows="2"></textarea>
+      </label>
+
+      <div class="actions">
+        <button class="btn primary" type="submit">Save Entry</button>
+      </div>
+    </form>
+
+    <footer>
+      <small>Data stays in this folder as <code>journal.xlsx</code>Complete Privacy is maintained. Made by Muhtasim Alam.</small>
+    </footer>
+  </div>
+</body>
+</html>

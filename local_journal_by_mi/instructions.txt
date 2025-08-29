@@ -1,0 +1,3 @@
+Type CMD in address bar of folder then input-
+
+python -m pip install flask pandas openpyxl
